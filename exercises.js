@@ -47,15 +47,24 @@ console.log(alphaOrder("asd"));
  */
 
  function vowelCount(num) {
-     const vowels = ["a","e","i","o","u"];
-    let stringArry = num.split('');
-    for (let i = 0; i < stringArry.length; i++) {
-        console.log(stringArry[i]) 
-        
+    const vowels = ["a","e","i","o","u"];
+    let countVowels = 0;
+    if (typeof num !== "string") {
+        return null;
+    } else {
+        let stringArry = num.split("");
+        for (let i = 0; i < stringArry.length; i++) {
+            for (let x = 0; x < vowels.length - 1; x++) {
+                if(vowels[x] == stringArry[i]) {
+                    countVowels++;
+                }
+            }  
+        }
     }
+    return countVowels;
  }
 
- vowelCount("hellsadasdo")
+ console.log(vowelCount("aaaaaaaaaaaaaaa"));
 
  /** Function: timeConvert
  * The function will take the str parameter representing the amount of minutes being passed in and
@@ -65,6 +74,16 @@ console.log(alphaOrder("asd"));
  * @return {string} as hours:minutes
  * ie: 68 => 1:8
  */
+function timeConvert(num) {
+    if (typeof num !== "number") {
+        return null;
+    } else {
+        let hourRemains = Math.floor(num/60);
+        let minutes = Math.round((num/60 - hourRemains) * 60);
+        return hourRemains + ":" + minutes;
+    }
+}
+console.log(timeConvert(70))
 
  /** Function: repeatString
  * The function will take in two parameters and repeat a given string (first argument)
@@ -75,7 +94,18 @@ console.log(alphaOrder("asd"));
  * i.e repeatString("money", 3) => "moneymoneymoney".
  */
 
-
+function repeatString(str, num) {
+    let repeat = '';
+    if (typeof str !== "string" && typeof num !== "number") {
+        return null;
+    } else {
+        for(let i = 0; i < num; i++) {
+            repeat+=str;
+        }
+    } 
+    return repeat;
+}
+console.log(repeatString("bye",3));
 /**
  * Below here we see a module.exports which is set to an object with a bunch of keys.
  * The module.exports syntax is a built-in javascript keyword that
@@ -94,6 +124,6 @@ module.exports = {
     firstReverse: firstReverse,
     alphaOrder: alphaOrder,
     vowelCount: vowelCount,
-    timeConvert: null,
-    repeatString: null
+    timeConvert: timeConvert,
+    repeatString: repeatString,
 }
